@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
-const USER_API_BASE_URL = 'http://localhost:8080'; // 백엔드 서버 주소
+const USER_API_BASE_URL = process.env.REACT_APP_USER_API_URL || 'http://localhost:8080';
 
 export default function LoginPage({ onLogin }) {
   const navigate = useNavigate();
