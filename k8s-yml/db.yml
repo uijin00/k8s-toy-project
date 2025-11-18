@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-db-svc
+spec:
+  selector:
+    app: user-db
+  ports:
+  - port: 3306
+    targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-db-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-db
+  template:
+    metadata:
+      name: user-db-pod
+      labels:
+        app: user-db
+    spec:
+      containers:
+      - name: user-db-con
+        image: 61.254.18.30:5000/mysql
+        envFrom:
+        - secretRef:
+            name: user-db-sec
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: profile-db-svc
+spec:
+  selector:
+    app: profile-db
+  ports:
+  - port: 3306
+    targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-db-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile-db
+  template:
+    metadata:
+      name: profile-db-pod
+      labels:
+        app: profile-db
+    spec:
+      containers:
+      - name: profile-db-con
+        image: 61.254.18.30:5000/mysql
+        envFrom:
+        - secretRef:
+            name: profile-db-sec
