@@ -18,7 +18,8 @@ public class CorsConfig {
 
         // 프론트엔드 주소 허용
         config.setAllowedOrigins(Arrays.asList(
-                "http://localhost:3000"     // React 개발 서버
+                "http://localhost:3000",     // React 개발 서버
+                "http://myprofile.com"     // Ingress가 접속할 도메인
         ));
 
         // 허용할 HTTP 메서드
