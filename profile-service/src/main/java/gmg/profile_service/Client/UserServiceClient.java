@@ -18,6 +18,6 @@ public interface UserServiceClient {
     UserDTO getUser(@PathVariable("userId") UUID userId);
 
     // 사용자명으로 사용자 정보 조회
-    @GetMapping("/user/username/{name}")
+    @GetMapping("/api/user/username/{name}")
     UserDTO getUserByName(@PathVariable("name") String name);
 }

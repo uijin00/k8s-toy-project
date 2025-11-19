@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
       - name: user-api-con
-        image: 61.254.18.30:5000/k8s/user:1
+        image: 61.254.18.30:5000/k8s/user:3
         ports:
         - containerPort: 8080 
 
@@ -126,7 +126,7 @@ spec:
     spec:
       containers:
       - name: profile-api-con
-        image: 61.254.18.30:5000/k8s/profile:1
+        image: 61.254.18.30:5000/k8s/profile:4
         ports:
         - containerPort: 8081
 

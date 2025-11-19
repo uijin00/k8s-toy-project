@@ -4,7 +4,7 @@ metadata:
   name: user-db-sec
 type: Opaque
 stringData:
-  MYSQL_ROOT_PASSWORD : 1234
+  MYSQL_ROOT_PASSWORD : "1234"
   MYSQL_USER: useradmin
   MYSQL_PASSWORD: 1q2w3e4r
   MYSQL_DATABASE: k8stoy_user
@@ -15,7 +15,7 @@ metadata:
   name: profile-db-sec
 type: Opaque
 stringData:
-  MYSQL_ROOT_PASSWORD : 1234
+  MYSQL_ROOT_PASSWORD : "1234"
   MYSQL_USER: profileadmin
   MYSQL_PASSWORD: 4r3e2w1q
   MYSQL_DATABASE: k8stoy_profile

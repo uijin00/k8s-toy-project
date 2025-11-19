@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: user-api-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /user/$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: myprofile.com
+    http:
+      paths:
+      - path: /api/user(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: user-api-svc
+            port:
+              number: 8080
+

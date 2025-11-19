@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: profile-api-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /profile/$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: myprofile.com
+    http:
+      paths:
+      - path: /api/profile(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: profile-api-svc
+            port:
+              number: 8081
+

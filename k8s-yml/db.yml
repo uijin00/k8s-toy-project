@@ -8,6 +8,7 @@ spec:
   ports:
   - port: 3306
     targetPort: 3306
+    protocol: TCP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -20,13 +21,15 @@ spec:
       app: user-db
   template:
     metadata:
-      name: user-db-pod
       labels:
         app: user-db
     spec:
       containers:
       - name: user-db-con
         image: 61.254.18.30:5000/mysql
+        ports:
+        - containerPort: 3306
+        
         envFrom:
         - secretRef:
             name: user-db-sec
@@ -53,13 +56,15 @@ spec:
       app: profile-db
   template:
     metadata:
-      name: profile-db-pod
       labels:
         app: profile-db
     spec:
       containers:
       - name: profile-db-con
         image: 61.254.18.30:5000/mysql
+        ports:
+        - containerPort: 3306
+        
         envFrom:
         - secretRef:
             name: profile-db-sec

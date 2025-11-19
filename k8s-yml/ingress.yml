@@ -1,59 +1,39 @@
-# 1. React 프론트엔드 Ingress
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: react-app-ingress
+  name: myprofile-ingress
+  annotations:
+    # 별도의 rewrite 필요 없음
 spec:
+  ingressClassName: nginx
   rules:
-  - host: myprofile.com  # 도메인 설정
+  - host: myprofile.com
     http:
       paths:
+      # 프론트
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: k8s-front-svc    # React 앱을 서빙하는 Service 이름
+            name: k8s-front-svc
             port:
-              number: 80            # React 앱 Service 포트
----
-# 2. User API Ingress
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: user-api-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /user/$2
-spec:
-  rules:
-  - host: myprofile.com  # 도메인 설정
-    http:
-      paths:
-      - path: /api/user(/|$)(.*)
-        pathType: ImplementationSpecific
+              number: 80
+
+      # 유저 API
+      - path: /api/user
+        pathType: Prefix
         backend:
           service:
-            name: user-api-svc     # User API의 Service 이름
+            name: user-api-svc
             port:
-              number: 8080          # User API Service 포트
----
-# 3. Profile API Ingress
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: profile-api-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /profile/$2
-spec:
-  rules:
-  - host: myprofile.com  # 도메인 설정
-    http:
-      paths:
-      - path: /api/profile(/|$)(.*)
-        pathType: ImplementationSpecific
+              number: 8080
+
+      # 프로필 API
+      - path: /api/profile
+        pathType: Prefix
         backend:
           service:
-            name: profile-api-svc  # Profile API의 Service 이름
+            name: profile-api-svc
             port:
-              number: 8081          # Profile API Service 포트
+              number: 8081
+

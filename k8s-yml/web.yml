@@ -26,4 +26,4 @@ spec:
     spec:
       containers:
       - name: k8s-front-con
-        image: 61.254.18.30:5000/k8s/front:1
+        image: 61.254.18.30:5000/k8s/front:2
